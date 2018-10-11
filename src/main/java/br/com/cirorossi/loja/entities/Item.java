@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 
 @Data
 @EqualsAndHashCode
-@ToString
+@ToString(exclude = {"carrinho"})
 @NoArgsConstructor
 @AllArgsConstructor
 
@@ -13,21 +13,18 @@ import java.math.BigDecimal;
 @Table(name = "itens")
 public class Item {
 
- //   como que faz a notação de chave estrangeira
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
 
-    @Column(name = "idPedido", nullable = false)
-    private long idPedido;
-
-    @Column(name = "idProduct", nullable = false)
-    private long idProduct;
-
-    @Column(name = "precoUnitario", nullable = false)
-    private BigDecimal precoUnitario;
+    @OneToOne
+    @JoinColumn(name = "product_id", nullable = false)
+    private Product product;
 
     @Column(name = "quantity", nullable = false)
     private Integer quantity;
 
-    @Column(name = "precoTotal", nullable = false)
-    private BigDecimal precoTotal;
-
+    @ManyToOne
+    @JoinColumn(name = "id_carrinho", nullable = false)
+    private Carrinho carrinho;
 }

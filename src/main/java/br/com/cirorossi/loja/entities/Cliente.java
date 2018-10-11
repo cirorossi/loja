@@ -16,15 +16,12 @@ public class Cliente {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long idCliente;
+    private long id;
 
-    @Column(name = "nome", nullable = false)
+    @Column(name = "nome", nullable = false, unique = false)
     private String nome;
 
-    @Column(name = "email", nullable = false)
-    private String email;
-
-    @Column(name = "senha", nullable = false)
-    private String senha;
+    @Column(name = "active", nullable = false)
+    private Boolean active;
 
 }

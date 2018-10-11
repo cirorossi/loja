@@ -1,10 +1,12 @@
 package br.com.cirorossi.loja.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @EqualsAndHashCode
@@ -16,22 +18,15 @@ import java.util.Date;
 @Table(name = "carrinhos")
 public class Carrinho {
 
-    //   ???
-    //   como que faz a
-    //   notação de
-    //   chave estrangeira
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long idPedido;
 
-    @Column(name = "idCliente", nullable = false)
-    private long idCliente;
+    @OneToOne
+    @JoinColumn(name = "id_cliente", nullable = false)
+    private Cliente cliente;
 
-    @Column(name = "dataPedido", nullable = false)
-    private Date dataPedido;
-
-    @Column(name = "total", nullable = false)
-    private BigDecimal total;
-
+    @JsonIgnoreProperties(value = {"carrinho"})
+    @OneToMany(mappedBy = "carrinho")
+    private List<Item> items;
 }
