@@ -7,6 +7,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+import java.util.List;
 import java.util.Optional;
 
 @Slf4j
@@ -28,5 +30,16 @@ public class ProductsServiceImpl implements ProductsServices {
 
         log.info("M-ProductsServiceImpl.registerOrUpdate. II=registering or updating product: {}", product);
         this.productsRepository.delete(product);
+    }
+
+    @Override
+    public List<Product> ListGreaterThan(BigDecimal value) {
+        log.info("M-ProductsServiceImpl.ListGreaterThan. search : {}", value);
+        return this.productsRepository.findByValueGreaterThan(value);
+    }
+
+    @Override
+    public List<Product> list() {
+        return this.productsRepository.findAll();
     }
 }
