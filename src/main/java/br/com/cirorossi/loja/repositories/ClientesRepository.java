@@ -9,6 +9,6 @@ public interface ClientesRepository extends JpaRepository<Cliente, Long> {
 
     List<Cliente> findByActive(Boolean active);
 
-    List<Cliente> findByNameContaining(String nome);
+    List<Cliente> findByNomeContaining(String nome);
 
 }
